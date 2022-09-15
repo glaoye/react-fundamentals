@@ -5,14 +5,23 @@
   <div id="root"></div>
   <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
-<!-- react for creating elements (e.g. createElement), reactDOM for rendering elements (e.g. append)-->
 
   <script type="module">
     const rootElement = document.getElementById('root')
-    const reactElement = React.createElement('div', {className: 'container', children: 'Hello World'})
-    ReactDOM.createRoot(rootElement).render(reactElement)
-    // can use ReactDOM.render(reactElement, rootElement), although createRoot allows the root node to be stored and reused, so you don't have to repeatedly specify the container to render in
-    //current code is kinda pointless bc it is not using the full benefits of create root. Better to store the root as a variable, and use .render after
-    // although rootElement already exists, react does not know that this is the node to append everything . Create root lets it know
+    const hello = React.createElement('span', {children: 'Hello'}) //also works with const hello = React.createElement('span', {}, 'Hello')
+    const world = React.createElement('span', {children: 'World'})
+
+    const divElement = React.createElement('div', {className: 'container', children: [hello, ' ', world]})
+
+    ReactDOM.render(divElement, rootElement)
+    /*
+    Initially tried:
+    const hello = React.createElement('span', {children: 'Hello'})
+    const world = React.createElement('span', {children: 'Hello'})
+    ReactDOM.render(hello, divElement);
+    ReactDOM.render(world, divElement);
+    and variations incl with createRoot.
+    This doesn't work bc I think .render can only be used on the root node, not children. And you can only declare the root node once, either with createRoot or implicitely with .render
+    */
   </script>
 </body>
