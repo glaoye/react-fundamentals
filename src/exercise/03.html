@@ -8,12 +8,11 @@
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
 
   <script type="text/babel">
-    /* the browser will not compile this bc it has 'text/babel' instead of 'module' or 'text/javasript'
-    It takes the contents and makes a new script tag with compiled js
-    // to `type="text/babel"` so babel will compile this code for the browser to run.
-     */
+    const className = 'container'
+    const children = 'Hello World'
 
-    const element = <div className="container">Hello World</div>
+    //you can interpolate statements (e.g. if, try, for etc), although this doesn't include ternary operators, I don't think this is a statement
+    const element = <div className={className}>{children}</div>
 
     ReactDOM.createRoot(document.getElementById('root')).render(element)
   </script>
