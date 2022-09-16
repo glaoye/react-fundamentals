@@ -13,8 +13,12 @@
 
     //instead of instantly creaing a dom node 'message', it creates an element to hold space in memory until it goes into the function to find out what the dom node should be
     //the type is message(_ref) and is calculated in runtime
-    const element = React.createElement(message, {children: 'Hello World'}) //can pass function as type
-
+    const helloElement = React.createElement(message, {children: 'Hello World'}) //can pass function as type
+   //{helloElement} creates an actual message component/element in react components whereas the direct message call just creates a div
+    const element = <div className="container">
+      {helloElement}
+      {message({children: 'Goodbye World'})}
+    </div>
     ReactDOM.createRoot(document.getElementById('root')).render(element)
   </script>
 </body>
