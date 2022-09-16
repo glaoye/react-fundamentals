@@ -11,16 +11,10 @@
       return <div className="message">{props.children}</div> //{children}
     }
 
-    // 🐨 use that function in place of the divs below with:
-    // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
-    const element = (
-      <div className="container">
-        {message({children: 'Hello World'})}
-        {message({children: 'Goodbye World'})}
-      </div>
-    )
+    //instead of instantly creaing a dom node 'message', it creates an element to hold space in memory until it goes into the function to find out what the dom node should be
+    //the type is message(_ref) and is calculated in runtime
+    const element = React.createElement(message, {children: 'Hello World'}) //can pass function as type
 
-    // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
     ReactDOM.createRoot(document.getElementById('root')).render(element)
   </script>
 </body>
