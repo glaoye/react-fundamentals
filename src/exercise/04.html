@@ -7,18 +7,29 @@
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
   <script type="text/babel">
-    const message = (props) => { //or you can destructure and use ({children}) => {
-      return <div className="message">{props.children}</div> //{children}
+    /*
+    ui = <Capitalized /> // React.createElement(Capitalized)
+    ui = <property.access /> // React.createElement(property.access)
+    ui = <Property.Access /> // React.createElement(Property.Access)
+    ui = <Property['Access'] /> // SyntaxError
+    ui = <lowercase /> // React.createElement('lowercase')
+    ui = <kebab-case /> // React.createElement('kebab-case')
+    ui = <Upper-Kebab-Case /> // React.createElement('Upper-Kebab-Case')
+    ui = <Upper_Snake_Case /> // React.createElement(Upper_Snake_Case)
+    ui = <lower_snake_case /> // React.createElement('lower_snake_case')
+     */
+    const Message = props => {
+      return <div className="message">{props.children}</div>
     }
+    //<message>Hello World</message> renders <message> instead of <div>
+    //Capital letters ar references to variables in scope
+    const element = (
+      <div className="container">
+        <Message>Hello World</Message>
+        <Message>Goodbye World</Message>
+      </div>
+    )
 
-    //instead of instantly creaing a dom node 'message', it creates an element to hold space in memory until it goes into the function to find out what the dom node should be
-    //the type is message(_ref) and is calculated in runtime
-    const helloElement = React.createElement(message, {children: 'Hello World'}) //can pass function as type
-   //{helloElement} creates an actual message component/element in react components whereas the direct message call just creates a div
-    const element = <div className="container">
-      {helloElement}
-      {message({children: 'Goodbye World'})}
-    </div>
     ReactDOM.createRoot(document.getElementById('root')).render(element)
   </script>
 </body>
