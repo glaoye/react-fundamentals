@@ -7,26 +7,39 @@
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
   <script type="text/babel">
-    /*
-    ui = <Capitalized /> // React.createElement(Capitalized)
-    ui = <property.access /> // React.createElement(property.access)
-    ui = <Property.Access /> // React.createElement(Property.Access)
-    ui = <Property['Access'] /> // SyntaxError
-    ui = <lowercase /> // React.createElement('lowercase')
-    ui = <kebab-case /> // React.createElement('kebab-case')
-    ui = <Upper-Kebab-Case /> // React.createElement('Upper-Kebab-Case')
-    ui = <Upper_Snake_Case /> // React.createElement(Upper_Snake_Case)
-    ui = <lower_snake_case /> // React.createElement('lower_snake_case')
-     */
-    const Message = props => {
-      return <div className="message">{props.children}</div>
+
+    const Message = ({subject, greeting}) => {
+      return (
+        <div className="message">
+          {greeting}, {subject}
+        </div>
+      )
     }
-    //<message>Hello World</message> renders <message> instead of <div>
-    //Capital letters ar references to variables in scope
+
+    //only works in development
+    const PropTypes = {  //will need to be defined if it's not imported
+      string(props, propName, componentName) { //can be inline if necessary
+        if (typeof props[propName] !== 'string') { //print this error message if condition not met
+          return new Error(`${props} is not valid for ${componentName}`)
+        }
+      },
+    }
+
+    Message.propTypes = {
+      greeting: PropTypes.string,//lots of abstraction here I imagine
+      subject: PropTypes.string,
+    }
+
+    /*
+    - Set a proptypes property on to a function
+    - This property must have the propNames you want to validate, which have a value which is a validating function
+    - The function returns an error message if a condition is not met
+     */
+
     const element = (
       <div className="container">
-        <Message>Hello World</Message>
-        <Message>Goodbye World</Message>
+        <Message greeting="Hello" subject="World" />
+        <Message greeting="Goodbye" subject="World" />
       </div>
     )
 
