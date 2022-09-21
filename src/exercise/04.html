@@ -6,6 +6,7 @@
   <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
 
     const Message = ({subject, greeting}) => {
@@ -16,25 +17,10 @@
       )
     }
 
-    //only works in development
-    const PropTypes = {  //will need to be defined if it's not imported
-      string(props, propName, componentName) { //can be inline if necessary
-        if (typeof props[propName] !== 'string') { //print this error message if condition not met
-          return new Error(`${props} is not valid for ${componentName}`)
-        }
-      },
-    }
-
     Message.propTypes = {
-      greeting: PropTypes.string,//lots of abstraction here I imagine
-      subject: PropTypes.string,
+      greeting: PropTypes.string.isRequired, //is required needs to be specified bc it is ot included by default
+      subject: PropTypes.string.isRequired,
     }
-
-    /*
-    - Set a proptypes property on to a function
-    - This property must have the propNames you want to validate, which have a value which is a validating function
-    - The function returns an error message if a condition is not met
-     */
 
     const element = (
       <div className="container">
