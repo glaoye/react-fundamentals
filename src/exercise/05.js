@@ -4,13 +4,14 @@
 import * as React from 'react'
 import '../box-styles.css'
 
-const Box = props => {
+const Box = ({className='', style, ...otherProps}) => { //can split off a prop and provide it a default value
   return (
     <div
-      className={props.className ? `box ${props.className}` : 'box'}
-      style={{...props.style, fontStyle: 'italic'}}
+      className={`box ${className}`.trim()}
+      //put spread last so that it is not overridden by default css
+      style={{ fontStyle: 'italic', ...style}}
+      {...otherProps} // this includes props.children
     >
-      {props.children}
     </div>
   )
 }
